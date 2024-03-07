@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Pascals triangle
+Pascals triangle implementation
 """
 
 
