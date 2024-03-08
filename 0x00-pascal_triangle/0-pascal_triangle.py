@@ -5,6 +5,16 @@ Pascals triangle implementation
 
 
 def pascal_triangle(n):
+    """
+    Returns the pascal triangle for a given value.
+
+    Parameters:
+    - n (int): The number for which the pascal's triangle will be generated.
+
+    Returns:
+    - list of lists: The pascal triangle generated.
+    """
+
     triangle = []
 
     if n <= 0:
