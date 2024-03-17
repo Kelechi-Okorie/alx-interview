@@ -3,6 +3,7 @@
 Lockboxes implementation
 """
 
+
 def canUnlockAll(boxes):
     """
     Determines if all boxes can be opened
@@ -10,7 +11,7 @@ def canUnlockAll(boxes):
     parameters:
     - boxes (list): list of all the boxes
 
-    Returns 
+    Returns
     - True if all boxes can be opened, False otherwise
     """
 
@@ -21,11 +22,11 @@ def canUnlockAll(boxes):
     while keys:
         cur_key = keys.pop()
         cur_box = boxes[cur_key]
-        
+
         for key in cur_box:
             if 0 <= key < len(boxes) and not visited[key]:
                 visited[key] = True
                 keys.append(key)
-    
+
     # Check if all boxes have been visited
     return all(visited)
