@@ -1,4 +1,4 @@
-#!/user/bin/env python3
+#!/usr/bin/python3
 """Reads the stdin and computes a given stats"""
 
 
@@ -8,12 +8,12 @@ import sys
 
 def compute_metrics():
     total_size = 0
-    status_counts = defaultdic(int)
+    status_counts = defaultdict(int)
 
     try:
         line_count = 0
         for line in sys.stdin:
-            lint_count += 1
+            line_count += 1
 
             parts = line.split()
             if len(parts) != 10:
@@ -28,9 +28,16 @@ def compute_metrics():
                 pass
 
             if line_count % 10 == 0:
-                print_statstics(total_size, status_counts)
-        except KeyboardInterrupt:
-            print_statistics(total_size, status_counts)
+                print_statistics(total_size, status_counts)
+    except KeyboardInterrupt:
+        print_statistics(total_size, status_counts)
+
+
+def print_statistics(total_size, status_counts):
+    print("Total file size:", total_size)
+    for status_code in sorted(status_counts.keys()):
+        if status_code in [200, 301, 400, 401, 403, 404, 405, 500]:
+            print(f"{status_code}: {status_counts[status_code]}")
 
 
 if __name__ == "__main__":
