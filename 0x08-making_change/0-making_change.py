@@ -7,23 +7,29 @@ def makeChange(coins, total):
     if total <= 0:
         return 0
 
-    # Initialize an array to store the fewest number of coins needed
-    # for each amount from 0 to total
-    dp = [float('inf')] * (total + 1)
-    dp[0] = 0  # 0 coins needed to make amount 0
+    # Sort the coins in descending order
+    coins.sort(reverse=True)
+
+    # Initialize a variable to store the number of coins needed
+    num_coins = 0
 
     # Iterate through each coin value
     for coin in coins:
-        # Update dp array for each amount from coin value to total
-        for amount in range(coin, total + 1):
-            # Update dp[amount] with the minimum of current value
-            # and dp[amount - coin] + 1
-            dp[amount] = min(dp[amount], dp[amount - coin] + 1)
+        # Calculate how many coins of the current denomination can be used
+        num_of_coins = total // coin
+        # Update the total amount
+        total -= num_of_coins * coin
+        # Update the number of coins needed
+        num_coins += num_of_coins
 
-    # If the value of dp[total] is still infinity, total cannot be
-    # met by any number of coins
-    if dp[total] == float('inf'):
+        # If total becomes 0, break the loop
+        if total == 0:
+            break
+
+    # If total is still greater than 0, total cannot be met by
+    # any number of coins
+    if total > 0:
         return -1
 
-    # Return the fewest number of coins needed for total
-    return dp[total]
+    # Return the number of coins needed
+    return num_coins
